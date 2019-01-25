@@ -1,16 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
-public class ParentSceneManager : MonoBehaviour
+public enum Scenes
 {
-    [SerializeField]
-    string[] dontDestroyScenes;
+    Title,
+    Stage1,
+    Stage2,
+    Stage3,
+    Stage4,
+    Stage5,
+}
 
+public class StageLoader : MonoBehaviour, IEndStageEventReceiver
+{
     [SerializeField]
     string[] defaultSceneNames;
 
     [SerializeField]
     Object[][] scenes;
+
+    [SerializeField]
+    Dictionary<int, int> dic = null;
 
     void Start()
     {
@@ -44,14 +56,23 @@ public class ParentSceneManager : MonoBehaviour
 
     void Reload()
     {
-        foreach (var d in defaultSceneNames)
-        {
-            SceneManager.LoadSceneAsync(d, LoadSceneMode.Additive);
-        }
-
+        //ロードしてアンロードしないと一瞬レンダリングされない
         foreach (var d in defaultSceneNames)
         {
             SceneManager.UnloadSceneAsync(d);
         }
+
+        foreach (var d in defaultSceneNames)
+        {
+            SceneManager.LoadSceneAsync(d, LoadSceneMode.Additive);
+        }
+    }
+
+    public void ExecuteEndEvent(string currentSceneName)
+    {
+        SceneManager.UnloadSceneAsync(currentSceneName);
+
+        //次のシーンをロード
+        SceneManager.LoadSceneAsync("TestScene", LoadSceneMode.Additive);
     }
 }
