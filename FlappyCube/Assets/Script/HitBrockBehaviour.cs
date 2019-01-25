@@ -6,6 +6,8 @@ public class HitBrockBehaviour : MonoBehaviour
     [SerializeField]
     GameObject eventTarget = null;
 
+    void Start() => eventTarget = GameObject.Find("Mover");
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Block")

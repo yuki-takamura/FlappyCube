@@ -10,8 +10,5 @@ public class Move : MonoBehaviour, IHitEventReceiver
         transform.position += Vector3.right * speed * Time.deltaTime;
     }
 
-    public void Execute()
-    {
-        enabled = false;
-    }
+    public void Execute() => enabled = false;
 }
