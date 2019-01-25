@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9165ff132f3714747a7ef3cc463895ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyScenes: []
-  defaultSceneNames:
+  defaultStageName: Stage1
+  stageNames:
   - Stage1
+  - Stage2
+  - Stage3

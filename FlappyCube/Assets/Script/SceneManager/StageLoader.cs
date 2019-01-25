@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum Scenes
+public enum EScenes
 {
-    Title,
+    //Title,
     Stage1,
     Stage2,
     Stage3,
@@ -16,20 +16,24 @@ public enum Scenes
 public class StageLoader : MonoBehaviour, IEndStageEventReceiver
 {
     [SerializeField]
-    string[] defaultSceneNames;
+    string defaultStageName = null;
+
+    string currentStageName;
 
     [SerializeField]
-    Object[][] scenes;
+    string[] stageNames = null;
 
-    [SerializeField]
-    Dictionary<int, int> dic = null;
+    Dictionary<string, EScenes> dic = new Dictionary<string, EScenes>();
 
     void Start()
     {
-        foreach (var d in defaultSceneNames)
+        for(int i = 0; i < stageNames.Length; i++)
         {
-            SceneManager.LoadSceneAsync(d, LoadSceneMode.Additive);
+            dic.Add(stageNames[i], (EScenes)i);
         }
+
+        SceneManager.LoadSceneAsync(defaultStageName, LoadSceneMode.Additive);
+        currentStageName = defaultStageName;
     }
 
     void Update()
@@ -56,23 +60,25 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
 
     void Reload()
     {
-        //ロードしてアンロードしないと一瞬レンダリングされない
-        foreach (var d in defaultSceneNames)
-        {
-            SceneManager.UnloadSceneAsync(d);
-        }
+        //ロードしてアンロードしないと一瞬レンダリングされない?
+        //ビルド版だと今のところ大丈夫
+        SceneManager.UnloadSceneAsync(currentStageName);
 
-        foreach (var d in defaultSceneNames)
-        {
-            SceneManager.LoadSceneAsync(d, LoadSceneMode.Additive);
-        }
+        SceneManager.LoadSceneAsync(currentStageName, LoadSceneMode.Additive);
     }
 
-    public void ExecuteEndEvent(string currentSceneName)
+    public void ExecuteEndEvent(string endStageName)
     {
-        SceneManager.UnloadSceneAsync(currentSceneName);
+        SceneManager.UnloadSceneAsync(endStageName);
 
         //次のシーンをロード
-        SceneManager.LoadSceneAsync("TestScene", LoadSceneMode.Additive);
+        var current = (int)dic[endStageName] + 1;
+        if(current >= stageNames.Length)
+        {
+            current = 0;
+        }
+        SceneManager.LoadSceneAsync(stageNames[current],
+            LoadSceneMode.Additive);
+        currentStageName = stageNames[current];
     }
 }
