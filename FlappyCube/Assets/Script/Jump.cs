@@ -22,7 +22,7 @@ public class Jump : MonoBehaviour
 
         //if(Input.GetKey(KeyCode.RightArrow))
         //{
-        //moveDirection.x = 1;
+        moveDirection.x = 1;
         //}
 
         moveDirection.y -= 10 * Time.deltaTime;
