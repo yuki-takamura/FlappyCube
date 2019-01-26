@@ -28,7 +28,6 @@ public class EndSceneEventDispatcher : MonoBehaviour
 #endif
 
         var current = gameObject.scene.name;
-
         ExecuteEvents.Execute<IEndStageEventReceiver>(
             target: target,
             eventData: null,

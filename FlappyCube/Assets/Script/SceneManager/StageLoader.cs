@@ -23,16 +23,34 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
     [SerializeField]
     string[] stageNames = null;
 
-    Dictionary<string, EScenes> dic = new Dictionary<string, EScenes>();
+    Dictionary<string, EScenes> scenesDictionary = new Dictionary<string, EScenes>();
 
     void Start()
     {
         for(int i = 0; i < stageNames.Length; i++)
         {
-            dic.Add(stageNames[i], (EScenes)i);
+            scenesDictionary.Add(stageNames[i], (EScenes)i);
         }
 
-        //SceneManager.
+#if UNITY_EDITOR
+        for(int i = 0; i < SceneManager.sceneCount;i++)
+        {
+            //既に読み込み済みのシーンがあった場合ロードしない
+            var name = SceneManager.GetSceneAt(i).name;
+            if(name == defaultStageName)
+            {
+                currentStageName = defaultStageName;
+                return;
+            }
+
+            //defaultステージ以外が入っていたら
+            if(scenesDictionary.ContainsKey(name))
+            {
+                currentStageName = name;
+                return;
+            }
+        }
+#endif
         SceneManager.LoadSceneAsync(defaultStageName, LoadSceneMode.Additive);
         currentStageName = defaultStageName;
     }
@@ -55,7 +73,14 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
         //TODO:これはここで書くべきではないので修正する
         if (GUI.Button(new Rect(120, 20, 100, 50), "Pause"))
         {
-            Time.timeScale = 0.0f;
+            if (Time.timeScale == 0.0f)
+            {
+                Time.timeScale = 1.0f;
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+            }
         }
     }
 
@@ -73,7 +98,7 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
         SceneManager.UnloadSceneAsync(endStageName);
 
         //次のシーンをロード
-        var current = (int)dic[endStageName] + 1;
+        var current = (int)scenesDictionary[endStageName] + 1;
         if(current >= stageNames.Length)
         {
             current = 0;
