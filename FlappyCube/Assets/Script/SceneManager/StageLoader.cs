@@ -32,6 +32,7 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
             dic.Add(stageNames[i], (EScenes)i);
         }
 
+        //SceneManager.
         SceneManager.LoadSceneAsync(defaultStageName, LoadSceneMode.Additive);
         currentStageName = defaultStageName;
     }
