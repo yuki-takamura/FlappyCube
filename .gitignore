@@ -1,10 +1,10 @@
 ﻿[Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
-[Bi]nary/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+Binary/
 
 # Never ignore Asset meta data
 ![Aa]ssets/**/*.meta
