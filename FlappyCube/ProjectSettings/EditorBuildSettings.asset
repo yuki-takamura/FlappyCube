@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ParentScene.unity
     guid: 6d6c7afc8e8cc6b49b64fd38cba76ed9
   - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: d711473dabdfd8e4689e5669f606cf0e
+  - enabled: 1
     path: Assets/Scenes/Stages/Stage1.unity
     guid: 3cdb047c00b161e4b8630175a7c02729
   - enabled: 1
