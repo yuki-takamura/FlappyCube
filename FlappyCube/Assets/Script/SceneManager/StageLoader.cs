@@ -25,6 +25,9 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
 
     Dictionary<string, EScenes> scenesDictionary = new Dictionary<string, EScenes>();
 
+    [SerializeField]
+    GameObject scoreManager = null;
+
     void Start()
     {
         for(int i = 0; i < stageNames.Length; i++)
@@ -91,6 +94,8 @@ public class StageLoader : MonoBehaviour, IEndStageEventReceiver
         SceneManager.UnloadSceneAsync(currentStageName);
 
         SceneManager.LoadSceneAsync(currentStageName, LoadSceneMode.Additive);
+
+        scoreManager.GetComponent<ScoreViewer>().ResetScore();
     }
 
     public void ExecuteEndEvent(string endStageName)

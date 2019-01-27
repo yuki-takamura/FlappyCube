@@ -36,14 +36,6 @@ public class EndSceneEventDispatcher : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void Update()
-    {
-        if(!Input.GetKeyDown(KeyCode.R))
-            return;
-
-        Reload();
-    }
-
     private void OnGUI()
     {
         if (target != null)
