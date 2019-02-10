@@ -359,12 +359,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794156873}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f4cc70e3d6b7449a784d7844a02b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 4d3b1ae7cd87ba746adf19d7822874bb, type: 2}
+  material: {fileID: 2100000, guid: 5ce6827a4e1fa9744a87875d49c3c4c4, type: 2}
+--- !u!114 &794156878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794156873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884676471b7455948b91b959b222ffb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: 3bf72ab12919025409b32bdccd9cbc6c, type: 3}
+  _outlineThreshold: 0.1
+  _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  _outlineThick: 4
 --- !u!1 &837882605
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +930,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423348697619287162, guid: 894ebac530a963d4bae6cbf9b1e365dd,
+        type: 3}
+      propertyPath: m_AllowMSAA
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423348697619287162, guid: 894ebac530a963d4bae6cbf9b1e365dd,
+        type: 3}
+      propertyPath: m_HDR
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423348697619287162, guid: 894ebac530a963d4bae6cbf9b1e365dd,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 894ebac530a963d4bae6cbf9b1e365dd, type: 3}
